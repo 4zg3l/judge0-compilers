@@ -30,7 +30,7 @@ RUN apt-get install -y --no-install-recommends ghc=9.0.2-4
 RUN apt-get install -y --no-install-recommends mono-complete=6.8.0.105+dfsg-3.3
 
 # Install nodejs (javascript)
-RUN apt-get install -y --no-install-recommends nodejs=18.19.0+dfsg-6~deb12u2
+RUN apt-get install -y --no-install-recommends nodejs=18.19.0+dfsg-6~deb12u2 npm=9.2.0~ds1-1
 
 # Install Erlang
 RUN apt-get install -y --no-install-recommends erlang=1:25.2.3+dfsg-1+deb12u1
@@ -184,6 +184,9 @@ RUN set -xe && \
   echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/isolate.asc] http://www.ucw.cz/isolate/debian/ bookworm-isolate main' >> /etc/apt/sources.list &&\
   curl https://www.ucw.cz/isolate/debian/signing-key.asc >/etc/apt/keyrings/isolate.asc &&\
   apt-get update && apt-get install isolate
+
+# I didn't want to redo every layer so I put this at the end
+RUN apt-get install -y --no-install-recommends ruby-dev=1:3.1
 
 
 ENV BOX_ROOT /var/local/lib/isolate
